@@ -1,0 +1,50 @@
+---
+title: "How to create a new package project"
+author: "Are Strom"
+date: "`r Sys.Date()`"
+output:
+  github_document:
+    html_preview: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Using RStudio GUI
+
+### In RStudio
+
+1. Create new package project: *File > New Project > New Directory > R Package*. Then enter package name, add any existing R code, set the project subdirectory, check *Create a git repository*. Then click *Create Project*. 
+
+2. Edit the DESCRIPTION file as needed. Just fill in suggested language. First version should be set to 0.1.9000.
+
+3. In upper-left corner select the *Git* tab. Click the *Staged* checkboxes for all files listed. Then click on *Commit* and include a short commit message. Typically *Initial commit* the first time. Make sure you commit something...anything. Otherwise you will get an error in step 6.
+
+4. In your github account click on *New Repository*. Enter the repository name. Use the same name as you gave the package in RStudio. Enter a short description. Do not add a readme, gitignore, or license. 
+
+5. Connect your RStudio package project to the new GitHub repository you created in step 4. In the GitHub page that pops up after you created the new repo see the option that says *…or push an existing repository from the command line*. Click to the right of this option and copy the two lines of command line text to your clipboard. 
+
+6. In RStudio look in the upper right corner for the gear icon in the *Git* tab. Click on *Shell* to open a command line window for Git. Paste the contents of your clipboard (copied in step 5) to the Git command window. Click enter. You should get a message similar to: 
+
+```
+Counting objects: 4, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 877 bytes | 0 bytes/s, done.
+Total 4 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To git@github.com:arestrom/remisc.git
+   f61e596..b7bbde5  master -> master
+Branch master set up to track remote branch master from origin.
+```
+7. In your GitHub repository, refresh the page to verify your committed files were transferred properly from RStudio to GitHub. 
+
+8. After editing all your files go to the *Build* tab in the upper right pane in RStudio. Click on the *Check* button to see if all is ready. 
+
+
+
+
+
+
+

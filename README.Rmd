@@ -1,0 +1,36 @@
+---
+output:
+  github_document:
+    html_preview: false
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+options(tibble.print_min = 5, tibble.print_max = 5)
+```
+
+# remisc
+
+## Overview
+
+This package is a collection of very simple utility functions for my own use. I created this
+package in part just to learn how to build a package. I also built it to avoid having to 
+source or paste in functions I use reasonably often, but keep forgetting the exact code to 
+recreate.
+
+Most of these were cribbed from elsewhere, including from *Advanced R, Wickham (2014)*, and
+*R Project* documentation. 
+
+## Installation
+
+```{r, eval = FALSE}
+# Install the development version from GitHub:
+# install.packages("devtools")
+devtools::install_github("arestrom/remisc")
+```
+
+
