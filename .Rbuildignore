@@ -1,4 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^readme.Rmd$
+^readme.md$
 ^CreatePackageNotes.Rmd$
