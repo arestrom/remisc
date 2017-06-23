@@ -1,17 +1,9 @@
-#' Simple utility functions for vectors
-#'
-#' These functions are intended for my convenience, and as an exercise to learn
-#' package building. Functions take either a character vector in the case of
-#' (trim, set_na, set_empty, trim_semi_colon) or a numeric or integer vector
-#' in the case of f2c or c2f. The n_omit function will accept vectors of any
-#' type
-
-#' Get length of a vector, omitting NAs
+#' Get the length of a vector, omitting NAs
 #' @rdname n_omit
 #' @importFrom stats na.omit
 #' @param x a vector of any type
 #' @return The length of vector \code{x} ignoring an NA values.
-#' @examples # Compute length of a vector, omitting NAs
+#' @examples
 #' fish_length = c(24.5, 16.8, 12.6, NA, 18.9)
 #' n_omit(fish_length)
 #' @export
@@ -20,8 +12,8 @@ n_omit = function(x) c(n=length(na.omit(x)))
 #' Trim whitespace before and after string
 #' @rdname trim
 #' @param x a character vector
-#' @return The length of vector \code{x} ignoring an NA values.
-#' @examples # Trim whitespace before and after string value
+#' @return Vector \code{x} of strings with whitespace on either side removed
+#' @examples
 #' fish_code = c("STHD ", " CHUM", " PINK ", "COHO")
 #' trim(fish_code)
 #' @export
