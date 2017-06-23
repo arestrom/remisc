@@ -12,6 +12,8 @@ Most of these were cribbed from elsewhere, including from *Advanced R, Wickham (
 Installation
 ------------
 
+There is a bug in R-3.4.0 that prevents installation of this package. You will need to install the current patched version (R-3.4.1) or higher. Download at: <https://cran.r-project.org/bin/windows/base/rpatched.html>
+
 ``` r
 # Install the development version from GitHub:
 # install.packages("devtools")
