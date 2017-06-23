@@ -11,11 +11,13 @@ set_na(x, na_value = "")
 
 \item{na_value}{a value such as "" or "9999" that should be converted to NA}
 }
+\value{
+A vector \code{x} of strings with indicators of missing values converted to NA
+}
 \description{
 Convert empty strings, or indicators of missing values ("", "9999") to NAs
 }
 \examples{
-# Convert empty string values "" to NA
 fish_missing = c("STHD", "", "CHUM", "CHIN")
 fish_na = set_na(fish_missing)
 }

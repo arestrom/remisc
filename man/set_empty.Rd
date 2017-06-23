@@ -9,11 +9,13 @@ set_empty(x)
 \arguments{
 \item{x}{a character vector}
 }
+\value{
+A vector \code{x} of strings with NAs converted to an empty string ("")
+}
 \description{
 Convert NAs to empty strings ("")
 }
 \examples{
-# Convert NA string values to empty ("") string.
 fish_na = c("STHD", NA, "CHUM", "CHIN")
 fish_missing = set_empty(fish_na)
 }

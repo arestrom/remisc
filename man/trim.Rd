@@ -10,13 +10,12 @@ trim(x)
 \item{x}{a character vector}
 }
 \value{
-The length of vector \code{x} ignoring an NA values.
+A vector \code{x} of strings with whitespace removed
 }
 \description{
 Trim whitespace before and after string
 }
 \examples{
-# Trim whitespace before and after string value
 fish_code = c("STHD ", " CHUM", " PINK ", "COHO")
 trim(fish_code)
 }

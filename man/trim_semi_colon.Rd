@@ -9,11 +9,13 @@ trim_semi_colon(x)
 \arguments{
 \item{x}{a character vector}
 }
+\value{
+A vector \code{x} of strings with trailing semi-colons stripped out
+}
 \description{
 Trim trailing semi-colon from a vector of strings
 }
 \examples{
-# Get rid of a trailing semi-colon
 observers = c("Austin;Wesley;", "Losee;Madel", "Morris;Starling;")
 observers_fixed = trim_semi_colon(observers)
 }

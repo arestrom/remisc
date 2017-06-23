@@ -11,11 +11,15 @@ f2c(x, dec = 1)
 
 \item{dec}{an integer specifying the number of decimals of rounding}
 }
+\value{
+A vector \code{x} of temperature measurements converted from
+  fahrenheit to celsius. The number of decimals returned is set using
+  `dec`.
+}
 \description{
 Convert farenheit to celsius
 }
 \examples{
-# Convert from fahrenheit to celsius
 temp_f = c(32, 70.356, 212)
 temp_c = f2c(temp_f, dec = 2)
 }
