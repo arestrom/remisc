@@ -14,7 +14,7 @@ f2c(x, dec = 1)
 \value{
 A vector \code{x} of temperature measurements converted from
   fahrenheit to celsius. The number of decimals returned is set using
-  `dec`.
+  \code{dec}.
 }
 \description{
 Convert farenheit to celsius

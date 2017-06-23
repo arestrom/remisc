@@ -1,6 +1,6 @@
 Package: remisc
 Type: Package
-Title: Some simple utility functions for personal use.
+Title: Some simple utility functions for personal use
 Version: 0.1.0
 Author: Are Strom
 Maintainer: Are Strom <are.strom@gmail.com>

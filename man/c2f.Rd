@@ -14,7 +14,7 @@ c2f(x, dec = 1)
 \value{
 A vector \code{x} of temperature measurements converted from
   celsius to fahrenheit. The number of decimals returned is set using
-  `dec`.
+  \code{dec}.
 }
 \description{
 Convert celsius to farenheit

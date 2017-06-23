@@ -62,7 +62,7 @@ trim_semi_colon = function(x) sub("[;]+$", "", x)
 #' @param dec an integer specifying the number of decimals of rounding
 #' @return A vector \code{x} of temperature measurements converted from
 #'   fahrenheit to celsius. The number of decimals returned is set using
-#'   `dec`.
+#'   \code{dec}.
 #' @examples
 #' temp_f = c(32, 70.356, 212)
 #' temp_c = f2c(temp_f, dec = 2)
@@ -75,7 +75,7 @@ f2c = function(x, dec = 1) round((5/9) * (x - 32), dec)
 #' @param dec an integer specifying the number of decimals of rounding
 #' @return A vector \code{x} of temperature measurements converted from
 #'   celsius to fahrenheit. The number of decimals returned is set using
-#'   `dec`.
+#'   \code{dec}.
 #' @examples
 #' temp_c = c(0.00, 21.31, 100.00)
 #' temp_f = c2f(temp_c, dec = 1)
