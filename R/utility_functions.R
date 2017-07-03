@@ -1,8 +1,8 @@
-#' Get the length of a vector, omitting NAs
+#' Get the length of a vector, omitting NAs. Vector can be of any type.
 #' @rdname n_omit
 #' @importFrom stats na.omit
 #' @param x a vector of any type
-#' @return The length of vector \code{x} ignoring an NA values.
+#' @return The length of vector \code{x} ignoring any NA values.
 #' @examples
 #' fish_length = c(24.5, 16.8, 12.6, NA, 18.9)
 #' n_omit(fish_length)
@@ -12,7 +12,7 @@ n_omit = function(x) c(n=length(na.omit(x)))
 #' Trim whitespace before and after string
 #' @rdname trim
 #' @param x a character vector
-#' @return A vector \code{x} of strings with whitespace removed
+#' @return A vector \code{x} of strings with white-space removed
 #' @examples
 #' fish_code = c("STHD ", " CHUM", " PINK ", "COHO")
 #' trim(fish_code)
@@ -22,7 +22,7 @@ trim = function(x) gsub("^[[:space:]]+|[[:space:]]+$", "", x)
 #' Convert empty strings, or indicators of missing values ("", "9999") to NAs
 #' @rdname set_na
 #' @param x a character vector
-#' @param na_value a value such as "" or "9999" that should be converted to NA
+#' @param na_value a string value such as "" or "9999" that should be converted to NA
 #' @return A vector \code{x} of strings with indicators of missing values converted to NA
 #' @examples
 #' fish_missing = c("STHD", "", "CHUM", "CHIN")
@@ -46,7 +46,7 @@ set_empty = function(x) {
   x
 }
 
-#' Trim trailing semi-colon from a vector of strings
+#' Trim trailing semi-colon from each string in a vector of strings
 #' @rdname trim_semi_colon
 #' @param x a character vector
 #' @return A vector \code{x} of strings with trailing semi-colons stripped out
@@ -56,9 +56,9 @@ set_empty = function(x) {
 #' @export
 trim_semi_colon = function(x) sub("[;]+$", "", x)
 
-#' Convert farenheit to celsius
+#' Convert temperature in farenheit to degrees celsius
 #' @rdname f2c
-#' @param x an integer or numeric vector
+#' @param x an integer or numeric vector of temperature measurements in degrees fahrenheit
 #' @param dec an integer specifying the number of decimals of rounding
 #' @return A vector \code{x} of temperature measurements converted from
 #'   fahrenheit to celsius. The number of decimals returned is set using
@@ -69,9 +69,9 @@ trim_semi_colon = function(x) sub("[;]+$", "", x)
 #' @export
 f2c = function(x, dec = 1) round((5/9) * (x - 32), dec)
 
-#' Convert celsius to farenheit
+#' Convert temperature in celsius to degrees farenheit
 #' @rdname c2f
-#' @param x an integer or numeric vector
+#' @param x an integer or numeric vector of temperature measurements in degrees celsius
 #' @param dec an integer specifying the number of decimals of rounding
 #' @return A vector \code{x} of temperature measurements converted from
 #'   celsius to fahrenheit. The number of decimals returned is set using
