@@ -1,4 +1,4 @@
-#' Get the length of a vector, omitting NAs. Vector can be of any type.
+#' Get the length of a vector of any type, omitting NAs
 #' @rdname n_omit
 #' @importFrom stats na.omit
 #' @param x a vector of any type
@@ -9,7 +9,7 @@
 #' @export
 n_omit = function(x) c(n=length(na.omit(x)))
 
-#' Trim whitespace before and after string
+#' Trim white-space before and after each string in a vector
 #' @rdname trim
 #' @param x a character vector
 #' @return A vector \code{x} of strings with white-space removed
