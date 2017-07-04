@@ -2,12 +2,12 @@
 % Please edit documentation in R/utility_functions.R
 \name{f2c}
 \alias{f2c}
-\title{Convert farenheit to celsius}
+\title{Convert temperature in farenheit to degrees celsius}
 \usage{
 f2c(x, dec = 1)
 }
 \arguments{
-\item{x}{an integer or numeric vector}
+\item{x}{an integer or numeric vector of temperature measurements in degrees fahrenheit}
 
 \item{dec}{an integer specifying the number of decimals of rounding}
 }
@@ -17,7 +17,7 @@ A vector \code{x} of temperature measurements converted from
   \code{dec}.
 }
 \description{
-Convert farenheit to celsius
+Convert temperature in farenheit to degrees celsius
 }
 \examples{
 temp_f = c(32, 70.356, 212)

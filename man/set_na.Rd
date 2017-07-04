@@ -9,7 +9,7 @@ set_na(x, na_value = "")
 \arguments{
 \item{x}{a character vector}
 
-\item{na_value}{a value such as "" or "9999" that should be converted to NA}
+\item{na_value}{a string value such as "" or "9999" that should be converted to NA}
 }
 \value{
 A vector \code{x} of strings with indicators of missing values converted to NA

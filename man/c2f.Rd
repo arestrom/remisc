@@ -2,12 +2,12 @@
 % Please edit documentation in R/utility_functions.R
 \name{c2f}
 \alias{c2f}
-\title{Convert celsius to farenheit}
+\title{Convert temperature in celsius to degrees farenheit}
 \usage{
 c2f(x, dec = 1)
 }
 \arguments{
-\item{x}{an integer or numeric vector}
+\item{x}{an integer or numeric vector of temperature measurements in degrees celsius}
 
 \item{dec}{an integer specifying the number of decimals of rounding}
 }
@@ -17,7 +17,7 @@ A vector \code{x} of temperature measurements converted from
   \code{dec}.
 }
 \description{
-Convert celsius to farenheit
+Convert temperature in celsius to degrees farenheit
 }
 \examples{
 temp_c = c(0.00, 21.31, 100.00)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utility_functions.R
 \name{n_omit}
 \alias{n_omit}
-\title{Get the length of a vector, omitting NAs}
+\title{Get the length of a vector of any type, omitting NAs}
 \usage{
 n_omit(x)
 }
@@ -10,10 +10,10 @@ n_omit(x)
 \item{x}{a vector of any type}
 }
 \value{
-The length of vector \code{x} ignoring an NA values.
+The length of vector \code{x} ignoring any NA values.
 }
 \description{
-Get the length of a vector, omitting NAs
+Get the length of a vector of any type, omitting NAs
 }
 \examples{
 fish_length = c(24.5, 16.8, 12.6, NA, 18.9)
