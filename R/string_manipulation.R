@@ -1,6 +1,7 @@
 #' Convert mixed case strings to capital case
 #' @rdname capwords
 #' @param s A character vector of strings
+#' @param strict Should strings such as acronyms also be converted
 #' @return A character vector with strings in mixed case converted to capital case \code{s}
 #' @examples
 #' fish_names = c("king = chinook", "silver = coho")

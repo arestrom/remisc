@@ -8,6 +8,8 @@ capwords(s, strict = FALSE)
 }
 \arguments{
 \item{s}{A character vector of strings}
+
+\item{strict}{Should strings such as acronyms also be converted}
 }
 \value{
 A character vector with strings in mixed case converted to capital case \code{s}
