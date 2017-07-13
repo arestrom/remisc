@@ -85,3 +85,4 @@ f2c = function(x, dec = 1) round((5/9) * (x - 32), dec)
 #' temp_f = c2f(temp_c, dec = 1)
 #' @export
 c2f = function(x, dec = 1) round(((9/5 * x) + 32), dec)
+
