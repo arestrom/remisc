@@ -19,11 +19,13 @@ n_omit = function(x) c(n=length(na.omit(x)))
 #' @export
 trim = function(x) gsub("^[[:space:]]+|[[:space:]]+$", "", x)
 
-#' Convert empty strings, or indicators of missing values ("", "9999") to NAs
+#' Convert empty strings, or indicators of missing values to NAs
 #' @rdname set_na
 #' @param x a character vector
-#' @param na_value a string value such as "" or "9999" that should be converted to NA
-#' @return A vector \code{x} of strings with indicators of missing values converted to NA
+#' @param na_value a string value such as "" or "9999" that should be converted
+#'   to NA
+#' @return A vector \code{x} of strings with indicators of missing values
+#'   converted to NA
 #' @examples
 #' fish_missing = c("STHD", "", "CHUM", "CHIN")
 #' fish_na = set_na(fish_missing)
@@ -36,7 +38,8 @@ set_na = function(x, na_value = "") {
 #' Convert NAs to empty strings ("")
 #' @rdname set_empty
 #' @param x a character vector
-#' @return A vector \code{x} of strings with NAs converted to an empty string ("")
+#' @return A vector \code{x} of strings with NAs converted to an empty string
+#'   ("")
 #' @examples
 #' fish_na = c("STHD", NA, "CHUM", "CHIN")
 #' fish_missing = set_empty(fish_na)
@@ -58,7 +61,8 @@ trim_semi_colon = function(x) sub("[;]+$", "", x)
 
 #' Convert temperature in farenheit to degrees celsius
 #' @rdname f2c
-#' @param x an integer or numeric vector of temperature measurements in degrees fahrenheit
+#' @param x an integer or numeric vector of temperature measurements in degrees
+#'   fahrenheit
 #' @param dec an integer specifying the number of decimals of rounding
 #' @return A vector \code{x} of temperature measurements converted from
 #'   fahrenheit to celsius. The number of decimals returned is set using
@@ -71,11 +75,11 @@ f2c = function(x, dec = 1) round((5/9) * (x - 32), dec)
 
 #' Convert temperature in celsius to degrees farenheit
 #' @rdname c2f
-#' @param x an integer or numeric vector of temperature measurements in degrees celsius
+#' @param x an integer or numeric vector of temperature measurements in degrees
+#'   celsius
 #' @param dec an integer specifying the number of decimals of rounding
-#' @return A vector \code{x} of temperature measurements converted from
-#'   celsius to fahrenheit. The number of decimals returned is set using
-#'   \code{dec}.
+#' @return A vector \code{x} of temperature measurements converted from celsius
+#'   to fahrenheit. The number of decimals returned is set using \code{dec}.
 #' @examples
 #' temp_c = c(0.00, 21.31, 100.00)
 #' temp_f = c2f(temp_c, dec = 1)

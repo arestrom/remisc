@@ -7,14 +7,14 @@
 c2f(x, dec = 1)
 }
 \arguments{
-\item{x}{an integer or numeric vector of temperature measurements in degrees celsius}
+\item{x}{an integer or numeric vector of temperature measurements in degrees
+celsius}
 
 \item{dec}{an integer specifying the number of decimals of rounding}
 }
 \value{
-A vector \code{x} of temperature measurements converted from
-  celsius to fahrenheit. The number of decimals returned is set using
-  \code{dec}.
+A vector \code{x} of temperature measurements converted from celsius
+  to fahrenheit. The number of decimals returned is set using \code{dec}.
 }
 \description{
 Convert temperature in celsius to degrees farenheit

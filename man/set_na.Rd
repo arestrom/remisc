@@ -2,20 +2,22 @@
 % Please edit documentation in R/short_generic.R
 \name{set_na}
 \alias{set_na}
-\title{Convert empty strings, or indicators of missing values ("", "9999") to NAs}
+\title{Convert empty strings, or indicators of missing values to NAs}
 \usage{
 set_na(x, na_value = "")
 }
 \arguments{
 \item{x}{a character vector}
 
-\item{na_value}{a string value such as "" or "9999" that should be converted to NA}
+\item{na_value}{a string value such as "" or "9999" that should be converted
+to NA}
 }
 \value{
-A vector \code{x} of strings with indicators of missing values converted to NA
+A vector \code{x} of strings with indicators of missing values
+  converted to NA
 }
 \description{
-Convert empty strings, or indicators of missing values ("", "9999") to NAs
+Convert empty strings, or indicators of missing values to NAs
 }
 \examples{
 fish_missing = c("STHD", "", "CHUM", "CHIN")

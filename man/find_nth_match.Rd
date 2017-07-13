@@ -2,7 +2,7 @@
 % Please edit documentation in R/string_manipulation.R
 \name{find_nth_match}
 \alias{find_nth_match}
-\title{Find position of the nth match of one string in another string}
+\title{Find the nth match of one string in another string}
 \usage{
 find_nth_match(x, str_part, start_pos = 1, nth_match = 1)
 }

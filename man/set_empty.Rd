@@ -10,7 +10,8 @@ set_empty(x)
 \item{x}{a character vector}
 }
 \value{
-A vector \code{x} of strings with NAs converted to an empty string ("")
+A vector \code{x} of strings with NAs converted to an empty string
+  ("")
 }
 \description{
 Convert NAs to empty strings ("")

@@ -7,7 +7,8 @@
 f2c(x, dec = 1)
 }
 \arguments{
-\item{x}{an integer or numeric vector of temperature measurements in degrees fahrenheit}
+\item{x}{an integer or numeric vector of temperature measurements in degrees
+fahrenheit}
 
 \item{dec}{an integer specifying the number of decimals of rounding}
 }

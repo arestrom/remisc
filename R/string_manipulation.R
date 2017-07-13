@@ -14,7 +14,7 @@ capwords <- function(s, strict = FALSE) {
   sapply(strsplit(s, split = " "), cap, USE.NAMES = !is.null(names(s)))
 }
 
-#' @title Find position of the nth match of one string in another string
+#' @title Find the nth match of one string in another string
 #'
 #' @description Identify the location of a specific match among several possible
 #'   matches. Adapted from a stackoverflow solution by Abdelmonem Mahmoud.
