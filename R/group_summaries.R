@@ -25,12 +25,12 @@
 add_group_summaries <- function(d, groupingVars, ...) {
   # convert char vector into spliceable vector
   groupingSyms <- rlang::syms(groupingVars)
-  dg <- ungroup(d) # just in case
-  dg <- group_by(dg, !!!groupingSyms)
-  ds <- summarize(dg, ...)
+  dg <- dplyr::ungroup(d) # just in case
+  dg <- dplyr::group_by(dg, !!!groupingSyms)
+  ds <- dplyr::summarize(dg, ...)
   # work around https://github.com/tidyverse/dplyr/issues/2963
-  ds <- ungroup(ds)
-  left_join(d, ds, by= groupingVars)
+  ds <- dplyr::ungroup(ds)
+  dplyr::left_join(d, ds, by= groupingVars)
 }
 
 #' group_by and summarize as an atomic action.
@@ -59,9 +59,9 @@ add_group_summaries <- function(d, groupingVars, ...) {
 group_summarize <- function(d, groupingVars, ...) {
   # convert char vector into spliceable vector
   groupingSyms <- rlang::syms(groupingVars)
-  dg <- ungroup(d) # just in case
-  dg <- group_by(dg, !!!groupingSyms)
-  ds <- summarize(dg, ...)
+  dg <- dplyr::ungroup(d) # just in case
+  dg <- dplyr::group_by(dg, !!!groupingSyms)
+  ds <- dplyr::summarize(dg, ...)
   # work around https://github.com/tidyverse/dplyr/issues/2963
-  ungroup(ds)
+  dplyr::ungroup(ds)
 }
