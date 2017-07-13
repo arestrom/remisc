@@ -6,6 +6,13 @@
 \usage{
 get_text_item(x, item = 2, sep = " ")
 }
+\arguments{
+\item{x}{A vector of character strings}
+
+\item{item}{The relative position of the item to extract}
+
+\item{sep}{The separator used to split the string}
+}
 \description{
 Extract portions of a string as defined by a separator such as a
   comma or whitespace. For example, in a vector strings of first and last

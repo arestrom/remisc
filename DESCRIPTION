@@ -8,6 +8,9 @@ Description: The start of a collection of very simple utility functions
     that are handy to store as a package. These were collected as a 
     personal use package. Functions may be cribbed from various sources  
     including R core, and Advanced R (Wickham, 2014).
+Depends: R (>= 3.4.1)
+Suggests: 
+    tibble
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

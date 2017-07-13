@@ -17,16 +17,14 @@ capwords <- function(s, strict = FALSE) {
 #' @title Find position of the nth match of one string in another string
 #'
 #' @description Identify the location of a specific match among several possible
-#'   matches. For example, find the second decimal point in a Lat-Lon string.
-#'   Derived from stackoverflow solution from Abdelmonem Mahmoud:
-#'   /14249562/find-location-of-character-in-string.
+#'   matches. Adapted from a stackoverflow solution by Abdelmonem Mahmoud.
 #'
 #' @section Warning:
-#'   Use with caution. This function has not been fully tested. Do not use
+#'   Use with caution. This function has not been fully tested. Be careful using
 #'   regular expressions for matching. Instead, define the character or string
-#'   that you need to match by enclosing in quotes. For example "9", or "but".
+#'   that you need to match by enclosing in quotes. For example "9", or "bb".
 #'   To find special characters that need to be escaped, place two backslashes
-#'   directly in front of the character. For example, "\\\.".
+#'   directly in front of the character. For example, "\\\." to match a period.
 #'
 #' @rdname find_nth_match
 #' @param x A vector of character strings to search
@@ -36,11 +34,15 @@ capwords <- function(s, strict = FALSE) {
 #' @return An integer value indicating the position in the string where the
 #'   nth_match was found, or NA if no nth_match was found.
 #' @examples
-#' # Create a vector of coordinate strings with an error
-#' dat = tibble::tibble(coords = c("47.1089: -122.8965", "47.9076: -123.65.98"))
+#' # Create a vector of coordinate strings with transcription errors
+#' dat = tibble::tibble(coords = c("47.1089N: -122.8965", "47.907N: -123.65.98"))
 #'
-#' # Locate the error
-#' dat$dec_pos = find_nth_match(dat$coords, "\\\.", nth_match = 3)
+#' # Locate any unwanted entries of N
+#' dat$dec_pos = find_nth_match(dat$coords, "N", nth_match = 1)
+#'
+#' # Locate the extra decimal error
+#' dat$dec_pos = find_nth_match(dat$coords, "\\.", nth_match = 3)
+#'
 #' @export
 find_nth_match = function(x, str_part, start_pos = 1, nth_match = 1) {
   match_nth_string = function(x, pattern, start_pos = 1, nth_match = 1) {
@@ -61,6 +63,9 @@ find_nth_match = function(x, str_part, start_pos = 1, nth_match = 1) {
 #'   comma or whitespace. For example, in a vector strings of first and last
 #'   name, such as "Bob Smith", the first name can be extracted as item number
 #'   one and last name as item number two.
+#' @param x A vector of character strings
+#' @param item The relative position of the item to extract
+#' @param sep The separator used to split the string
 #' @examples
 #' # Define a vector of names that need to be broken out into columns
 #' fish_names = tibble::tibble(names = c("Coho Salmon, Silvers",
