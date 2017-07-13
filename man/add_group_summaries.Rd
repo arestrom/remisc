@@ -25,10 +25,10 @@ a higher-order dplyr verb. Author: John Mount, Win-Vector LLC.
 }
 \examples{
 
-add_group_summaries(mtcars,
-                    c("cyl", "gear"),
-                    group_mean_mpg = mean(mpg),
-                    group_mean_disp = mean(disp)) \%>\%
-  head()
+added_group_means = add_group_summaries(mtcars,
+                                        c("cyl", "gear"),
+                                        group_mean_mpg = mean(mpg),
+                                        group_mean_disp = mean(disp))
+head(added_group_means)
 
 }

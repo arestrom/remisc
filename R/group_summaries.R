@@ -14,11 +14,11 @@
 #'
 #' @examples
 #'
-#' add_group_summaries(mtcars,
-#'                     c("cyl", "gear"),
-#'                     group_mean_mpg = mean(mpg),
-#'                     group_mean_disp = mean(disp)) %>%
-#'   head()
+#' added_group_means = add_group_summaries(mtcars,
+#'                                         c("cyl", "gear"),
+#'                                         group_mean_mpg = mean(mpg),
+#'                                         group_mean_disp = mean(disp))
+#' head(added_group_means)
 #'
 #' @export
 #'
@@ -48,11 +48,11 @@ add_group_summaries <- function(d, groupingVars, ...) {
 #'
 #' @examples
 #'
-#' group_summarize(mtcars,
-#'                     c("cyl", "gear"),
-#'                     group_mean_mpg = mean(mpg),
-#'                     group_mean_disp = mean(disp)) %>%
-#'   head()
+#' group_means = group_summarize(mtcars,
+#'                              c("cyl", "gear"),
+#'                              group_mean_mpg = mean(mpg),
+#'                              group_mean_disp = mean(disp))
+#' head(group_means)
 #'
 #' @export
 #'

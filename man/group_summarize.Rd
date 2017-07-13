@@ -24,10 +24,10 @@ Author: John Mount, Win-Vector LLC.
 }
 \examples{
 
-group_summarize(mtcars,
-                    c("cyl", "gear"),
-                    group_mean_mpg = mean(mpg),
-                    group_mean_disp = mean(disp)) \%>\%
-  head()
+group_means = group_summarize(mtcars,
+                             c("cyl", "gear"),
+                             group_mean_mpg = mean(mpg),
+                             group_mean_disp = mean(disp))
+head(group_means)
 
 }
