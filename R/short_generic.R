@@ -1,23 +1,8 @@
-#' Convert mixed case strings to capital case
-#' @rdname capwords
-#' @param s A character vector of strings
-#' @return A character vector with strings in mixed case converted to capital case \code{s}
-#' @examples
-#' fish_names = c("king = chinook", "silver = coho")
-#' capwords(fish_names)
-#' @export
-capwords <- function(s, strict = FALSE) {
-  cap <- function(s) paste(toupper(substring(s, 1, 1)),
-                           {s <- substring(s, 2); if(strict) tolower(s) else s},
-                           sep = "", collapse = " " )
-  sapply(strsplit(s, split = " "), cap, USE.NAMES = !is.null(names(s)))
-}
-
 #' Get the length of a vector of any type, omitting NAs
 #' @rdname n_omit
 #' @importFrom stats na.omit
 #' @param x a vector of any type
-#' @return The length of vector \code{x} ignoring any NA values
+#' @return The length of vector \code{x} ignoring any NA values.
 #' @examples
 #' fish_length = c(24.5, 16.8, 12.6, NA, 18.9)
 #' n_omit(fish_length)
@@ -34,11 +19,13 @@ n_omit = function(x) c(n=length(na.omit(x)))
 #' @export
 trim = function(x) gsub("^[[:space:]]+|[[:space:]]+$", "", x)
 
-#' Convert empty strings, or indicators of missing values ("", "9999") to NAs
+#' Convert empty strings, or indicators of missing values to NAs
 #' @rdname set_na
 #' @param x a character vector
-#' @param na_value a string value such as "" or "9999" that should be converted to NA
-#' @return A vector \code{x} of strings with indicators of missing values converted to NA
+#' @param na_value a string value such as "" or "9999" that should be converted
+#'   to NA
+#' @return A vector \code{x} of strings with indicators of missing values
+#'   converted to NA
 #' @examples
 #' fish_missing = c("STHD", "", "CHUM", "CHIN")
 #' fish_na = set_na(fish_missing)
@@ -51,7 +38,8 @@ set_na = function(x, na_value = "") {
 #' Convert NAs to empty strings ("")
 #' @rdname set_empty
 #' @param x a character vector
-#' @return A vector \code{x} of strings with NAs converted to an empty string ("")
+#' @return A vector \code{x} of strings with NAs converted to an empty string
+#'   ("")
 #' @examples
 #' fish_na = c("STHD", NA, "CHUM", "CHIN")
 #' fish_missing = set_empty(fish_na)
@@ -59,19 +47,6 @@ set_na = function(x, na_value = "") {
 set_empty = function(x) {
   x[is.na(x)] <- ""
   x
-}
-
-#' Remove nulls from elements in a list
-#' @rdname rm_nulls
-#' @param x a list containing null values
-#' @return A list \code{x} with NULL values converted to NAs
-#' @examples
-#' fish_null = list("Chum", "Pink", "Coho", NULL)
-#' fish_na = rm_nulls(fish_null)
-#' @export
-rm_nulls <- function(x) {
-  x[sapply(x, is.null)] <- NA
-  return(x)
 }
 
 #' Trim trailing semi-colon from each string in a vector of strings
@@ -86,7 +61,8 @@ trim_semi_colon = function(x) sub("[;]+$", "", x)
 
 #' Convert temperature in farenheit to degrees celsius
 #' @rdname f2c
-#' @param x an integer or numeric vector of temperature measurements in degrees fahrenheit
+#' @param x an integer or numeric vector of temperature measurements in degrees
+#'   fahrenheit
 #' @param dec an integer specifying the number of decimals of rounding
 #' @return A vector \code{x} of temperature measurements converted from
 #'   fahrenheit to celsius. The number of decimals returned is set using
@@ -99,17 +75,13 @@ f2c = function(x, dec = 1) round((5/9) * (x - 32), dec)
 
 #' Convert temperature in celsius to degrees farenheit
 #' @rdname c2f
-#' @param x an integer or numeric vector of temperature measurements in degrees celsius
+#' @param x an integer or numeric vector of temperature measurements in degrees
+#'   celsius
 #' @param dec an integer specifying the number of decimals of rounding
-#' @return A vector \code{x} of temperature measurements converted from
-#'   celsius to fahrenheit. The number of decimals returned is set using
-#'   \code{dec}.
+#' @return A vector \code{x} of temperature measurements converted from celsius
+#'   to fahrenheit. The number of decimals returned is set using \code{dec}.
 #' @examples
 #' temp_c = c(0.00, 21.31, 100.00)
 #' temp_f = c2f(temp_c, dec = 1)
 #' @export
 c2f = function(x, dec = 1) round(((9/5 * x) + 32), dec)
-
-
-
-
