@@ -4,13 +4,16 @@ Title: Some simple utility functions for personal use
 Version: 0.1.1
 Author: Are Strom
 Maintainer: Are Strom <are.strom@gmail.com>
-Description: The start of a collection of very simple utility functions 
+Description: The start of a collection of general utility functions 
     that are handy to store as a package. These were collected as a 
-    personal use package. Functions may be cribbed from various sources  
-    including R core, and Advanced R (Wickham, 2014).
+    personal use package. Functions were cribbed, or adapted, from 
+    various sources including R core, the Win-Vector blog by John
+    Mount, and Advanced R (Wickham, 2014).
 Depends: R (>= 3.4.1)
+Imports: 
+    dplyr (>= 0.7.1.9000)
 Suggests: 
-    tibble
+    tibble (>= 1.3.3)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
