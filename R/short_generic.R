@@ -86,12 +86,12 @@ f2c = function(x, dec = 1) round((5/9) * (x - 32), dec)
 #' @export
 c2f = function(x, dec = 1) round(((9/5 * x) + 32), dec)
 
-#' Multiply vectors in a dataframe by a factor
+#' Multiply vectors in a dataframe by a numeric or integer value
 #' @rdname mult_by
 #' @param dat a dataframe with only integer or numeric vectors
-#' @param mult_factor A numeric or integer value to use as a multiplier
+#' @param mult_value A numeric or integer value to use as a multiplier
 #' @return A dataframe \code{dat} with specified columns multiplied by
-#'   \code{mult_factor}.
+#'   \code{mult_value}.
 #'
 #' @examples
 #' fish_lengths = tibble::tibble(species = c("coho", "coho", "chin", "pink"),
@@ -99,9 +99,9 @@ c2f = function(x, dec = 1) round(((9/5 * x) + 32), dec)
 #'                               total_length = c(660, 589, 815, 450))
 #' fish_lengths[,2:3] = mult_by(fish_lengths[,2:3], 0.1)
 #' @export
-mult_by = function(dat, mult_factor) {
+mult_by = function(dat, mult_value) {
   mult_item = function(x) {
-    x * mult_factor
+    x * mult_value
   }
   dat_types = unique(unlist(lapply(dat, mode)))
   if(!identical(dat_types, "numeric")) {

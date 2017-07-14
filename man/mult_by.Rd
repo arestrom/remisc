@@ -2,21 +2,21 @@
 % Please edit documentation in R/short_generic.R
 \name{mult_by}
 \alias{mult_by}
-\title{Multiply vectors in a dataframe by a factor}
+\title{Multiply vectors in a dataframe by a numeric or integer value}
 \usage{
-mult_by(dat, mult_factor)
+mult_by(dat, mult_value)
 }
 \arguments{
 \item{dat}{a dataframe with only integer or numeric vectors}
 
-\item{mult_factor}{A numeric or integer value to use as a multiplier}
+\item{mult_value}{A numeric or integer value to use as a multiplier}
 }
 \value{
 A dataframe \code{dat} with specified columns multiplied by
-  \code{mult_factor}.
+  \code{mult_value}.
 }
 \description{
-Multiply vectors in a dataframe by a factor
+Multiply vectors in a dataframe by a numeric or integer value
 }
 \examples{
 fish_lengths = tibble::tibble(species = c("coho", "coho", "chin", "pink"),
