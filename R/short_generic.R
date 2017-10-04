@@ -41,11 +41,36 @@ set_na = function(x, na_value = "") {
 #' @return A vector \code{x} of strings with NAs converted to an empty string
 #'   ("")
 #' @examples
-#' fish_na = c("STHD", NA, "CHUM", "CHIN")
+#' # Set NA values in a vector to empty strings
+#' fish_na = c("STHD", NA_character, "CHUM", "CHIN")
 #' fish_missing = set_empty(fish_na)
+#'
+#' # Set NA values in an entire dataframe to empty strings
+#' fish_na = data_frame(fish_day = c("Mon", NA_character_, "Wed", "Thur"),
+#'                      fish_sp = c("STHD", NA_character_, "CHUM", "CHIN"))
+#' fish_na[] = lapply(fish_na, set_empty)
 #' @export
 set_empty = function(x) {
   x[is.na(x)] <- ""
+  x
+}
+
+#' Set NA values in an integer or numeric vector to zero. Useful for
+#' converting NA values to zero when computing summary counts
+#' @rdname set_na_zero
+#' @param x an integer or numeric vector
+#' @return A vector \code{x} of integers or numeric values equal to \code{0}
+#' @examples
+#' fish_zero = data_frame(fish_count = c(4L, NA, 5L),
+#'                        water_temp = c(5.4, 6.2, NA))
+#' fish_zero[] = lapply(fish_zero, set_na_zero)
+#' @export
+set_na_zero = function(x) {
+  if (!typeof(x) %in% c("integer", "double")) {
+    stop("\nx must be either an integer or numeric vector")
+  }
+  else if (typeof(x) == "integer") x[is.na(x)] <- 0L
+  else if (typeof(x) == "numeric") x[is.na(x)] <- 0
   x
 }
 
@@ -86,3 +111,23 @@ f2c = function(x, dec = 1) round((5/9) * (x - 32), dec)
 #' @export
 c2f = function(x, dec = 1) round(((9/5 * x) + 32), dec)
 
+#' Set all values in a vector or dataframe to NA, but preserve NA types
+#' @rdname set_na_type
+#' @param x a vector of any type
+#' @return A vector \code{x} where all values are \code{NA} but original data types
+#'   are retained
+#' @examples
+#' fish_empty = data_frame(fish_day = c("Mon", "Tue", "Wed"),
+#'                         fish_kept = c(TRUE, TRUE, FALSE),
+#'                         fish_count = c(4L, 9L, 5L),
+#'                         water_temp = c(5.4, 6.2, 4.1))
+#' fish_empty[] = lapply(fish_empty, set_na_type)
+#' @export
+set_na_type = function(x) {
+  if (typeof(x) == "logical") x = as.logical(NA)
+  else if (typeof(x) == "character") x = NA_character_
+  else if (typeof(x) == "integer") x = NA_integer_
+  else if (typeof(x) == "double") x = NA_real_
+  else x = NA_character_
+  x
+}
