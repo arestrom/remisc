@@ -1,4 +1,6 @@
-#' Get the length of a vector of any type, omitting NAs
+#' @title Get the length of a vector of any type, omitting NAs
+#' @description Calculate the length of a vector, but remove any
+#'   NA values prior to calculating the length.
 #' @rdname n_omit
 #' @importFrom stats na.omit
 #' @param x a vector of any type
@@ -9,17 +11,28 @@
 #' @export
 n_omit = function(x) c(n=length(na.omit(x)))
 
-#' Trim white-space before and after each string in a vector
+#' @title Trim white-space from either side of string
+#' @description Removes white-space before and after each string
+#'   in a vector of strings. There is a base R function \code{trimws}
+#'   that should be preferred. The \code{trim} function is being maintained
+#'   here strictly for backward compatibility and to avoid breaking
+#'   code.
 #' @rdname trim
 #' @param x a character vector
 #' @return A vector \code{x} of strings with white-space removed
 #' @examples
+#' # Example vector
 #' fish_code = c("STHD ", " CHUM", " PINK ", "COHO")
+#'
+#' # Remove the white-space
 #' trim(fish_code)
+#' @seealso \code{\link{trimws}} for a base R function
 #' @export
 trim = function(x) gsub("^[[:space:]]+|[[:space:]]+$", "", x)
 
-#' Convert empty strings, or indicators of missing values to NAs
+#' @title Convert empty strings to NAs
+#' @description Convert empty strings, or indicators of missing values, such
+#'  as '99999', to NAs.
 #' @rdname set_na
 #' @param x a character vector
 #' @param na_value a string value such as "" or "9999" that should be converted
@@ -35,19 +48,21 @@ set_na = function(x, na_value = "") {
   x
 }
 
-#' Convert NAs to empty strings ("")
+#' @title Convert NAs to empty strings ("")
+#' @description This can be useful when exporting a dataframe
+#'   to a csv or excel format. It gets rid of the printed NA values in the output.
 #' @rdname set_empty
 #' @param x a character vector
 #' @return A vector \code{x} of strings with NAs converted to an empty string
 #'   ("")
 #' @examples
 #' # Set NA values in a vector to empty strings
-#' fish_na = c("STHD", NA_character, "CHUM", "CHIN")
+#' fish_na = c("STHD", NA, "CHUM", "CHIN")
 #' fish_missing = set_empty(fish_na)
 #'
 #' # Set NA values in an entire dataframe to empty strings
-#' fish_na = data_frame(fish_day = c("Mon", NA_character_, "Wed", "Thur"),
-#'                      fish_sp = c("STHD", NA_character_, "CHUM", "CHIN"))
+#' fish_na = dplyr::data_frame(fish_day = c("Mon", NA_character_, "Wed", "Thur"),
+#'                             fish_sp = c("STHD", NA_character_, "CHUM", "CHIN"))
 #' fish_na[] = lapply(fish_na, set_empty)
 #' @export
 set_empty = function(x) {
@@ -55,14 +70,19 @@ set_empty = function(x) {
   x
 }
 
-#' Set NA values in an integer or numeric vector to zero. Useful for
-#' converting NA values to zero when computing summary counts
+#' @title Set NA values in an integer or numeric vector to zero.
+#' @description Useful for converting NA values to zero when computing summary
+#'  counts
 #' @rdname set_na_zero
 #' @param x an integer or numeric vector
-#' @return A vector \code{x} of integers or numeric values equal to \code{0}
+#' @return A vector \code{x} of integers or numeric values equal to \code{0}.
+#'  Use subsetting to apply function to only numeric or integer values.
 #' @examples
-#' fish_zero = data_frame(fish_count = c(4L, NA, 5L),
-#'                        water_temp = c(5.4, 6.2, NA))
+#' # Create example dataframe
+#' fish_zero = dplyr::data_frame(fish_count = c(4L, NA, 5L),
+#'                               water_temp = c(5.4, 6.2, NA))
+#'
+#' # Set missing values to zero
 #' fish_zero[] = lapply(fish_zero, set_na_zero)
 #' @export
 set_na_zero = function(x) {
@@ -74,12 +94,17 @@ set_na_zero = function(x) {
   x
 }
 
-#' Trim trailing semi-colon from each string in a vector of strings
+#' @title Trim trailing semi-colon from strings
+#' @description Remove the trailing semi-colon from each string in a vector of
+#'  strings
 #' @rdname trim_semi_colon
 #' @param x a character vector
 #' @return A vector \code{x} of strings with trailing semi-colons stripped out
 #' @examples
+#' # Example vector
 #' observers = c("Austin;Wesley;", "Losee;Madel", "Morris;Starling;")
+#'
+#' # Trim the trailing semi-colon
 #' observers_fixed = trim_semi_colon(observers)
 #' @export
 trim_semi_colon = function(x) sub("[;]+$", "", x)
@@ -117,10 +142,10 @@ c2f = function(x, dec = 1) round(((9/5 * x) + 32), dec)
 #' @return A vector \code{x} where all values are \code{NA} but original data types
 #'   are retained
 #' @examples
-#' fish_empty = data_frame(fish_day = c("Mon", "Tue", "Wed"),
-#'                         fish_kept = c(TRUE, TRUE, FALSE),
-#'                         fish_count = c(4L, 9L, 5L),
-#'                         water_temp = c(5.4, 6.2, 4.1))
+#' fish_empty = dplyr::data_frame(fish_day = c("Mon", "Tue", "Wed"),
+#'                                fish_kept = c(TRUE, TRUE, FALSE),
+#'                                fish_count = c(4L, 9L, 5L),
+#'                                water_temp = c(5.4, 6.2, 4.1))
 #' fish_empty[] = lapply(fish_empty, set_na_type)
 #' @export
 set_na_type = function(x) {

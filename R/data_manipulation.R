@@ -1,4 +1,7 @@
-#' @title Generate statistical week values given a vector of date values
+#' @importFrom dplyr data_frame mutate %>% if_else distinct select left_join
+#' @importFrom data.table := .GRP key as.data.table setkeyv
+#'
+#' @title Calculate statistical week from date values
 #'
 #' @description Generates a flavor of statistical week values typically encountered
 #'   in fisheries management related applications. Allows the start date of the stat
@@ -16,12 +19,11 @@
 #' stat_week = fish_stat_week(dtv)
 #'
 #' # Create dataframe with date values
-#' fish_catch = data_frame(survey_date = dtv,
-#'                         catch = as.integer(abs(rnorm(length(dtv)) * 10)))
+#' fish_catch = dplyr::data_frame(survey_date = dtv,
+#'                                catch = as.integer(abs(rnorm(length(dtv)) * 10)))
 #'
-#' # Add stat_week column using dplyr and chain syntax
-#' fish_catch = fish_catch %>%
-#'              mutate(stat_week = fish_stat_week(survey_date))
+#' # Add a stat_week column to fish_catch
+#' fish_catch$stat_week = fish_stat_week(fish_catch$survey_date)
 #'
 #' @export
 fish_stat_week = function(dts, start_day = "Mon") {
@@ -40,8 +42,8 @@ fish_stat_week = function(dts, start_day = "Mon") {
   dts = dts %>%
     mutate(start_day = start_day) %>%
     mutate(r_week = if_else(start_day == "Mon",
-                            as.integer(format(as.Date(s_day), '%W')) + 1,
-                            as.integer(format(as.Date(s_day), '%U')) + 1)) %>%
+                                   as.integer(format(as.Date(s_day), '%W')) + 1,
+                                   as.integer(format(as.Date(s_day), '%U')) + 1)) %>%
     mutate(s_year = as.integer(substr(s_day, 1, 4)))
   s_years = dts %>%
     select(s_year) %>%
@@ -58,7 +60,7 @@ fish_stat_week = function(dts, start_day = "Mon") {
   as.integer(dts$statweek)
 }
 
-#' @title Add a sequential integer ID to a dataframe with IDs partitioned by group
+#' @title Add an grouped integer ID to a dataframe
 #'
 #' @description Adds a new unique ID to each member of a group in a dataframe. This
 #'   is especially useful when processing data for upload to a database that uses
@@ -68,11 +70,11 @@ fish_stat_week = function(dts, start_day = "Mon") {
 #' @param dat A dataframe
 #' @param key_cols The group of variables that will be assigned a unique ID
 #' @param id_name The name to assign to the ID variable
-#' @param start_id The ID value used to start the ID sequence. If \code{0} (the default)
-#'   the IDs start at \code{1}.
+#' @param start_id The ID value used to start the ID sequence. If \code{0} the IDs
+#'   start at \code{1}.
 #' @examples
 #' # Create an example dataframe
-#' dat = data_frame(lat = c(rep(47.6590, 7),
+#' dat = dplyr::data_frame(lat = c(rep(47.6590, 7),
 #'                          rep(47.6348, 3),
 #'                          47.9033),
 #'                  lon = c(rep(-122.4657, 4),
@@ -89,11 +91,11 @@ fish_stat_week = function(dts, start_day = "Mon") {
 #'                 id_name = "survey_id", start_id = 100)
 #'
 #' @export
-add_intid = function(dat, key_cols, id_name, start_id = 0L) {
-  dt = data.table(dat)
+add_intid = function(dat, key_cols, id_name, start_id) {
+  dt = as.data.table(dat)
   setkeyv(dt, key_cols)
-  dt[, (id_name):=.GRP + start_id, by=key(dt)]
-  dt = as_tibble(dt)
+  dt[, (id_name):=.GRP + start_id, by=eval(key(dt))]
+  dt = tibble::as_tibble(dt)
   dt[names(dt)]
 }
 

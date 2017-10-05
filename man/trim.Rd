@@ -2,7 +2,7 @@
 % Please edit documentation in R/short_generic.R
 \name{trim}
 \alias{trim}
-\title{Trim white-space before and after each string in a vector}
+\title{Trim white-space from either side of string}
 \usage{
 trim(x)
 }
@@ -13,9 +13,19 @@ trim(x)
 A vector \code{x} of strings with white-space removed
 }
 \description{
-Trim white-space before and after each string in a vector
+Removes white-space before and after each string
+  in a vector of strings. There is a base R function \code{trimws}
+  that should be preferred. The \code{trim} function is being maintained
+  here strictly for backward compatibility and to avoid breaking
+  code.
 }
 \examples{
+# Example vector
 fish_code = c("STHD ", " CHUM", " PINK ", "COHO")
+
+# Remove the white-space
 trim(fish_code)
+}
+\seealso{
+\code{\link{trimws}} for a base R function
 }
