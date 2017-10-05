@@ -30,11 +30,11 @@ trim = function(x) gsub("^[[:space:]]+|[[:space:]]+$", "", x)
 #' # To convert blanks to NAs in a vector
 #' fish_missing = c("STHD", "", "CHUM", "CHIN")
 #' fish_na = set_na(fish_missing)
-#' 
+#'
 #' # To convert all blanks in a dataframe to NAs
 #' fish_barcode_out = FishBarcode
 #' fish_barcode_out[] = lapply(fish_barcode_out, set_na)
-#' 
+#'
 #' @export
 set_na = function(x, na_value = "") {
   x[x == na_value] <- NA
@@ -49,7 +49,7 @@ set_na = function(x, na_value = "") {
 #' @examples
 #' fish_na = c("STHD", NA, "CHUM", "CHIN")
 #' fish_missing = set_empty(fish_na)
-#' 
+#'
 #' # To convert all NAs in a dataframe to blanks
 #' fish_barcode_out = FishBarcode
 #' fish_barcode_out[] = lapply(fish_barcode_out, set_empty)
