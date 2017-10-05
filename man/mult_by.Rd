@@ -12,8 +12,8 @@ mult_by(dat, mult_value)
 \item{mult_value}{A numeric or integer value to use as a multiplier}
 }
 \value{
-A dataframe \code{dat} with specified columns multiplied by
-  \code{mult_value}.
+A vector, or dataframe \code{dat} with specified columns
+  multiplied by \code{mult_value}.
 }
 \description{
 Multiply a single vector or selected vectors in a

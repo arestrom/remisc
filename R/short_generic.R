@@ -164,8 +164,8 @@ set_na_type = function(x) {
 #' @rdname mult_by
 #' @param dat a dataframe with only integer or numeric vectors
 #' @param mult_value A numeric or integer value to use as a multiplier
-#' @return A dataframe \code{dat} with specified columns multiplied by
-#'   \code{mult_value}.
+#' @return A vector, or dataframe \code{dat} with specified columns
+#'   multiplied by \code{mult_value}.
 #'
 #' @examples
 #' # Create example dataframe
