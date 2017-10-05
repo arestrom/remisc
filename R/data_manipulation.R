@@ -42,8 +42,8 @@ fish_stat_week = function(dts, start_day = "Mon") {
   dts = dts %>%
     mutate(start_day = start_day) %>%
     mutate(r_week = if_else(start_day == "Mon",
-                                   as.integer(format(as.Date(s_day), '%W')) + 1,
-                                   as.integer(format(as.Date(s_day), '%U')) + 1)) %>%
+                            as.integer(format(as.Date(s_day), '%W')) + 1,
+                            as.integer(format(as.Date(s_day), '%U')) + 1)) %>%
     mutate(s_year = as.integer(substr(s_day, 1, 4)))
   s_years = dts %>%
     select(s_year) %>%
@@ -98,4 +98,3 @@ add_intid = function(dat, key_cols, id_name, start_id) {
   dt = tibble::as_tibble(dt)
   dt[names(dt)]
 }
-
