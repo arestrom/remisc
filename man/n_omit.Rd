@@ -13,7 +13,8 @@ n_omit(x)
 The length of vector \code{x} ignoring any NA values.
 }
 \description{
-Get the length of a vector of any type, omitting NAs
+Calculate the length of a vector, but remove any
+  NA values prior to calculating the length.
 }
 \examples{
 fish_length = c(24.5, 16.8, 12.6, NA, 18.9)

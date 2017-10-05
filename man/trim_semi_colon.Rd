@@ -2,7 +2,7 @@
 % Please edit documentation in R/short_generic.R
 \name{trim_semi_colon}
 \alias{trim_semi_colon}
-\title{Trim trailing semi-colon from each string in a vector of strings}
+\title{Trim trailing semi-colon from strings}
 \usage{
 trim_semi_colon(x)
 }
@@ -13,9 +13,13 @@ trim_semi_colon(x)
 A vector \code{x} of strings with trailing semi-colons stripped out
 }
 \description{
-Trim trailing semi-colon from each string in a vector of strings
+Remove the trailing semi-colon from each string in a vector of
+ strings
 }
 \examples{
+# Example vector
 observers = c("Austin;Wesley;", "Losee;Madel", "Morris;Starling;")
+
+# Trim the trailing semi-colon
 observers_fixed = trim_semi_colon(observers)
 }
