@@ -19,4 +19,8 @@ Convert NAs to empty strings ("")
 \examples{
 fish_na = c("STHD", NA, "CHUM", "CHIN")
 fish_missing = set_empty(fish_na)
+
+# To convert all NAs in a dataframe to blanks
+fish_barcode_out = FishBarcode
+fish_barcode_out[] = lapply(fish_barcode_out, set_empty)
 }

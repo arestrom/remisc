@@ -20,6 +20,12 @@ A vector \code{x} of strings with indicators of missing values
 Convert empty strings, or indicators of missing values to NAs
 }
 \examples{
+# To convert blanks to NAs in a vector
 fish_missing = c("STHD", "", "CHUM", "CHIN")
 fish_na = set_na(fish_missing)
+
+# To convert all blanks in a dataframe to NAs
+fish_barcode_out = FishBarcode
+fish_barcode_out[] = lapply(fish_barcode_out, set_na)
+
 }
