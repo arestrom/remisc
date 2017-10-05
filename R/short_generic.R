@@ -156,3 +156,28 @@ set_na_type = function(x) {
   else x = NA_character_
   x
 }
+
+#' Multiply vectors in a dataframe by a numeric or integer value
+#' @rdname mult_by
+#' @param dat a dataframe with only integer or numeric vectors
+#' @param mult_value A numeric or integer value to use as a multiplier
+#' @return A dataframe \code{dat} with specified columns multiplied by
+#'   \code{mult_value}.
+#'
+#' @examples
+#' fish_lengths = tibble::tibble(species = c("coho", "coho", "chin", "pink"),
+#'                               fork_length = c(650, 580, 804, NA),
+#'                               total_length = c(660, 589, 815, 450))
+#' fish_lengths[,2:3] = mult_by(fish_lengths[,2:3], 0.1)
+#' @export
+mult_by = function(dat, mult_value) {
+  mult_item = function(x) {
+    x * mult_value
+  }
+  dat_types = unique(unlist(lapply(dat, mode)))
+  if(!identical(dat_types, "numeric")) {
+    stop("All selected columns must be either numeric or integer")
+  }
+  dat[] = lapply(dat, mult_item)
+  dat
+}
