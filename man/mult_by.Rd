@@ -2,7 +2,7 @@
 % Please edit documentation in R/short_generic.R
 \name{mult_by}
 \alias{mult_by}
-\title{Multiply vectors in a dataframe by a numeric or integer value}
+\title{Multiply selected vectors by a constant}
 \usage{
 mult_by(dat, mult_value)
 }
@@ -16,11 +16,16 @@ A dataframe \code{dat} with specified columns multiplied by
   \code{mult_value}.
 }
 \description{
-Multiply vectors in a dataframe by a numeric or integer value
+Multiply a single vector or selected vectors in a
+  dataframe by a fixed constant value. Vectors must be either
+  numeric or integer.
 }
 \examples{
+# Create example dataframe
 fish_lengths = tibble::tibble(species = c("coho", "coho", "chin", "pink"),
                               fork_length = c(650, 580, 804, NA),
                               total_length = c(660, 589, 815, 450))
+
+# Multiply last two columns by 0.1
 fish_lengths[,2:3] = mult_by(fish_lengths[,2:3], 0.1)
 }

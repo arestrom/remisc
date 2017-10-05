@@ -157,7 +157,10 @@ set_na_type = function(x) {
   x
 }
 
-#' Multiply vectors in a dataframe by a numeric or integer value
+#' @title Multiply selected vectors by a constant
+#' @description Multiply a single vector or selected vectors in a
+#'   dataframe by a fixed constant value. Vectors must be either
+#'   numeric or integer.
 #' @rdname mult_by
 #' @param dat a dataframe with only integer or numeric vectors
 #' @param mult_value A numeric or integer value to use as a multiplier
@@ -165,9 +168,12 @@ set_na_type = function(x) {
 #'   \code{mult_value}.
 #'
 #' @examples
+#' # Create example dataframe
 #' fish_lengths = tibble::tibble(species = c("coho", "coho", "chin", "pink"),
 #'                               fork_length = c(650, 580, 804, NA),
 #'                               total_length = c(660, 589, 815, 450))
+#'
+#' # Multiply last two columns by 0.1
 #' fish_lengths[,2:3] = mult_by(fish_lengths[,2:3], 0.1)
 #' @export
 mult_by = function(dat, mult_value) {
