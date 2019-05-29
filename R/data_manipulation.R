@@ -1,5 +1,8 @@
-#' @importFrom dplyr data_frame mutate %>% if_else distinct select left_join
+#' @importFrom dplyr mutate %>% if_else distinct select left_join
+#' @importFrom tibble tibble
 #' @importFrom data.table := .GRP key as.data.table setkeyv
+#' @importFrom stats runif
+#' @importFrom digest digest
 #'
 #' @title Calculate statistical week from date values
 #'
@@ -19,8 +22,8 @@
 #' stat_week = fish_stat_week(dtv)
 #'
 #' # Create dataframe with date values
-#' fish_catch = dplyr::data_frame(survey_date = dtv,
-#'                                catch = as.integer(abs(rnorm(length(dtv)) * 10)))
+#' fish_catch = tibble::tibble(survey_date = dtv,
+#'                             catch = as.integer(abs(rnorm(length(dtv)) * 10)))
 #'
 #' # Add a stat_week column to fish_catch
 #' fish_catch$stat_week = fish_stat_week(fish_catch$survey_date)
@@ -37,7 +40,7 @@ fish_stat_week = function(dts, start_day = "Mon") {
   if (!start_day %in% c("Mon", "Sun")) {
     stop("\nstart_day must be either 'Mon' or 'Sun'")
   }
-  dts = data_frame(s_day = dts)
+  dts = tibble::tibble(s_day = dts)
   # Generate stat week for most cases using %W or %U format
   dts = dts %>%
     mutate(start_day = start_day) %>%
@@ -60,7 +63,7 @@ fish_stat_week = function(dts, start_day = "Mon") {
   as.integer(dts$statweek)
 }
 
-#' @title Add an grouped integer ID to a dataframe
+#' @title Add a grouped integer ID to a dataframe
 #'
 #' @description Adds a new unique ID to each member of a group in a dataframe. This
 #'   is especially useful when processing data for upload to a database that uses
@@ -74,17 +77,17 @@ fish_stat_week = function(dts, start_day = "Mon") {
 #'   start at \code{1}.
 #' @examples
 #' # Create an example dataframe
-#' dat = dplyr::data_frame(lat = c(rep(47.6590, 7),
-#'                          rep(47.6348, 3),
-#'                          47.9033),
-#'                  lon = c(rep(-122.4657, 4),
-#'                          rep(-122.8743, 3),
-#'                          rep(-122.8876, 2),
-#'                          -122.8345, -122.4443),
-#'                  species = c("chum", "chin", "chin",
-#'                              "sthd", "chin", "sthd",
-#'                              "sthd", "chum", "chum",
-#'                              "pink", "pink"))
+#' dat = tibble::tibble(lat = c(rep(47.6590, 7),
+#'                              rep(47.6348, 3),
+#'                              47.9033),
+#'                      lon = c(rep(-122.4657, 4),
+#'                              rep(-122.8743, 3),
+#'                              rep(-122.8876, 2),
+#'                              -122.8345, -122.4443),
+#'                      species = c("chum", "chin", "chin",
+#'                                  "sthd", "chin", "sthd",
+#'                                  "sthd", "chum", "chum",
+#'                                  "pink", "pink"))
 #'
 #' # Add an integer ID, grouped by the key columns
 #' dat = add_intid(dat, key_cols = c("lat", "lon", "species"),
@@ -97,4 +100,112 @@ add_intid = function(dat, key_cols, id_name, start_id) {
   dt[, (id_name):=.GRP + start_id, by=eval(key(dt))]
   dt = tibble::as_tibble(dt)
   dt[names(dt)]
+}
+
+#' @title Create a generator of Universally Unique Identifiers (UUIDs)
+#' @author Mikko Korpela
+#'
+#' @description Creates a generator of Universally Unique IDentifiers (UUIDs).
+#'   Returns a parameterless function (with some randomish internal state),
+#'   a call to which returns a vector of length one containing
+#'   the character representation of a Version 4 UUID (RFC 4122).
+#'
+#' @export
+uuid.gen <- function(more.state="") {
+  ## We know that the PRNG algorithms of R are reasonably good, but there
+  ## is no guarantee about the quality of an arbitrary user supplied PRNG.
+  if (RNGkind()[1] == "user-supplied") {
+    warning("a user-coded (pseudo) random number generator is in use")
+  }
+  ## Pastes together system and software information and current time.
+  op <- options(digits.secs=6)
+  prefix <- paste(c(Sys.info(), unlist(R.version),
+                    unlist(.Platform), getwd(), Sys.getpid(),
+                    format(Sys.time(), "%Y%m%d%H%M%S", usetz=TRUE),
+                    more.state),
+                  collapse="")
+  options(op)
+  ## Lookup table from hex to hex. Corresponds to setting
+  ## * the most significant bit to 1 and
+  ## * the second most significant bit to 0.
+  ## Linear search with string keys seems to be faster than
+  ## alternatives using a) a hashed environment or
+  ## b) the hex converted to integer +1 as an index to the table.
+  uuid.17.lookup <-
+    c("0" = "8", "1" = "9", "2" = "a", "3" = "b",
+      "4" = "8", "5" = "9", "6" = "a", "7" = "b", "8" = "8", "9" = "9",
+      "a" = "a", "b" = "b", "c" = "8", "d" = "9", "e" = "a", "f" = "b",
+      "A" = "A", "B" = "B", "C" = "8", "D" = "9", "E" = "A", "F" = "B")
+
+  function() {
+    ## We extract "enough" pseudo randomness, even preparing for a true
+    ## heavy user of UUIDs: 5 numbers correspond to 150-160 varying bits,
+    ## depending on the random number generator used (NO SAFETY GUARD
+    ## against the stupid use of a bad custom PRNG).
+    dgst <- digest::digest(paste0(prefix, paste0(stats::runif(5), collapse="")),
+                           algo = "md5",
+                           serialize = FALSE)
+    ## The UUID is formatted with hyphen-minus characters.
+    ## Some bits are set to fixed values according to UUID Version 4.
+    paste0(substr(dgst, 1, 8), "-",
+           substr(dgst, 9, 12), "-",
+           "4", substr(dgst, 14, 16), "-",
+           uuid.17.lookup[substr(dgst, 17, 17)], substr(dgst, 18, 20), "-",
+           substr(dgst, 21, 32))
+  }
+}
+
+
+#' @title Generate a vector of Version 4 UUIDs (RFC 4122)
+#'
+#' @description Generates a vector of Version 4 (RFC 4122) UUIDs. This
+#'   function can be used to generate a vector of random UUID keys prior to
+#'   uploading a set of data to a database table that uses UUIDs as primary
+#'   or foreign keys. The uuid.gen function was written by Mikko Korpela
+#'   and borrowed from the dplR package. It is included here only because
+#'   the dplR package generated a warning "Registered S3 method overwritten
+#'   by 'R.oo'" when the package was loading.
+#' @param n Number of UUIDs to generate
+#' @examples
+#' # Create example data frame
+#' dat = tibble::tibble(survey_date = c("2019-05-10",
+#'                                     "2019-05-12",
+#'                                     "2019-05-14"),
+#'                     species = c("chinook",
+#'                                 "chum",
+#'                                 "pink"),
+#'                     fish_count = c(3, 5, 25))
+#'
+#' # One UUID per row
+#' dat = dat %>%
+#'   mutate(survey_id = get_uuid(n = nrow(dat))) %>%
+#'   select(survey_id, survey_date, species, fish_count)
+#'
+#' # Create example data frame
+#' dat = tibble::tibble(survey_date = c("2019-05-10",
+#'                                     "2019-05-10",
+#'                                     "2019-05-14",
+#'                                     "2019-05-14",
+#'                                     "2019-05-18"),
+#'                     species = c("chinook",
+#'                                 "chinook",
+#'                                 "coho",
+#'                                 "chum",
+#'                                 "pink"),
+#'                     fish_count = c(3, 5, 8, 6, 25))
+#'
+#' # One UUID per group
+#' dat = dat %>%
+#'   group_by(survey_date) %>%
+#'   mutate(survey_id = get_uuid()) %>%
+#'   ungroup() %>%
+#'   select(survey_id, survey_date, species, fish_count)
+#'
+#' @export
+get_uuid = function(n = 1L) {
+  if (!typeof(n) %in% c("double", "integer") ) {
+    stop("n must be an integer or double")
+  }
+  ug = uuid.gen()
+  replicate(n = n, ug())
 }

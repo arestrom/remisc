@@ -1,20 +1,25 @@
 Package: remisc
 Type: Package
 Title: Some simple utility functions for personal use
-Version: 0.1.7
-Author: Are Strom
+Version: 0.1.8
+Authors@R: as.person(c(
+    "Are Strom <Are.Strom@dfw.wa.gov> [aut, cre]",
+    "Mikko Korpela [ctb]"
+    ))
 Maintainer: Are Strom <are.strom@gmail.com>
 Description: The start of a collection of general utility functions 
     that are handy to store as a package. These were collected as a 
     personal use package. Functions were cribbed, or adapted, from 
-    various sources including R core and Advanced R (Wickham, 2014).
-Depends: R (>= 3.4.1)
+    various sources including R core, Advanced R (Wickham, 2014),
+    and the dplR package.
+Depends: R (>= 3.5.0)
 Imports:
-    data.table (>= 1.10.4),
-    dplyr (>= 0.7.1)
-Suggests: 
-    tibble (>= 1.3.3)
+    data.table (>= 1.12.2),
+    dplyr (>= 0.8.1),
+    tibble (>= 2.1.1),
+    digest (>= 0.6.19),
+    stats (>= 3.6.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0

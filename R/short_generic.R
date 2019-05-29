@@ -28,7 +28,9 @@ n_omit = function(x) c(n=length(na.omit(x)))
 #' trim(fish_code)
 #' @seealso \code{\link{trimws}} for a base R function
 #' @export
-trim = function(x) gsub("^[[:space:]]+|[[:space:]]+$", "", x)
+trim = function(x) {
+  gsub("^[[:space:]]+|[[:space:]]+$", "", x)
+}
 
 #' @title Convert empty strings to NAs
 #' @description Convert empty strings, or indicators of missing values, such
@@ -61,8 +63,8 @@ set_na = function(x, na_value = "") {
 #' fish_missing = set_empty(fish_na)
 #'
 #' # Set NA values in an entire dataframe to empty strings
-#' fish_na = dplyr::data_frame(fish_day = c("Mon", NA_character_, "Wed", "Thur"),
-#'                             fish_sp = c("STHD", NA_character_, "CHUM", "CHIN"))
+#' fish_na = tibble::tibble(fish_day = c("Mon", NA_character_, "Wed", "Thur"),
+#'                          fish_sp = c("STHD", NA_character_, "CHUM", "CHIN"))
 #' fish_na[] = lapply(fish_na, set_empty)
 #' @export
 set_empty = function(x) {
@@ -79,8 +81,8 @@ set_empty = function(x) {
 #'  Use subsetting to apply function to only numeric or integer values.
 #' @examples
 #' # Create example dataframe
-#' fish_zero = dplyr::data_frame(fish_count = c(4L, NA, 5L),
-#'                               water_temp = c(5.4, 6.2, NA))
+#' fish_zero = tibble::tibble(fish_count = c(4L, NA, 5L),
+#'                            water_temp = c(5.4, 6.2, NA))
 #'
 #' # Set missing values to zero
 #' fish_zero[] = lapply(fish_zero, set_na_zero)
@@ -142,10 +144,10 @@ c2f = function(x, dec = 1) round(((9/5 * x) + 32), dec)
 #' @return A vector \code{x} where all values are \code{NA} but original data types
 #'   are retained
 #' @examples
-#' fish_empty = dplyr::data_frame(fish_day = c("Mon", "Tue", "Wed"),
-#'                                fish_kept = c(TRUE, TRUE, FALSE),
-#'                                fish_count = c(4L, 9L, 5L),
-#'                                water_temp = c(5.4, 6.2, 4.1))
+#' fish_empty = tibble::tibble(fish_day = c("Mon", "Tue", "Wed"),
+#'                             fish_kept = c(TRUE, TRUE, FALSE),
+#'                             fish_count = c(4L, 9L, 5L),
+#'                             water_temp = c(5.4, 6.2, 4.1))
 #' fish_empty[] = lapply(fish_empty, set_na_type)
 #' @export
 set_na_type = function(x) {
