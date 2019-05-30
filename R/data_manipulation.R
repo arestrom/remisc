@@ -1,9 +1,11 @@
-#' @importFrom dplyr mutate %>% if_else distinct select left_join
+#' @importFrom dplyr mutate if_else distinct select left_join
 #' @importFrom tibble tibble
 #' @importFrom data.table := .GRP key as.data.table setkeyv
 #' @importFrom stats runif
 #' @importFrom digest digest
-#'
+#' @importFrom magrittr %>%
+NULL
+
 #' @title Calculate statistical week from date values
 #'
 #' @description Generates a flavor of statistical week values typically encountered
@@ -76,6 +78,7 @@ fish_stat_week = function(dts, start_day = "Mon") {
 #' @param start_id The ID value used to start the ID sequence. If \code{0} the IDs
 #'   start at \code{1}.
 #' @examples
+#' \dontrun{
 #' # Create an example dataframe
 #' dat = tibble::tibble(lat = c(rep(47.6590, 7),
 #'                              rep(47.6348, 3),
@@ -92,6 +95,7 @@ fish_stat_week = function(dts, start_day = "Mon") {
 #' # Add an integer ID, grouped by the key columns
 #' dat = add_intid(dat, key_cols = c("lat", "lon", "species"),
 #'                 id_name = "survey_id", start_id = 100)
+#' }
 #'
 #' @export
 add_intid = function(dat, key_cols, id_name, start_id) {
@@ -109,20 +113,22 @@ add_intid = function(dat, key_cols, id_name, start_id) {
 #'   Returns a parameterless function (with some randomish internal state),
 #'   a call to which returns a vector of length one containing
 #'   the character representation of a Version 4 UUID (RFC 4122).
+#' @param more_state Additional items that can be added to generate random
+#'   state, such as Sys.info() (already used to generate state).
 #'
 #' @export
-uuid.gen <- function(more.state="") {
+uuid_gen <- function(more_state = "") {
   ## We know that the PRNG algorithms of R are reasonably good, but there
   ## is no guarantee about the quality of an arbitrary user supplied PRNG.
   if (RNGkind()[1] == "user-supplied") {
     warning("a user-coded (pseudo) random number generator is in use")
   }
   ## Pastes together system and software information and current time.
-  op <- options(digits.secs=6)
+  op <- options(digits.secs = 6)
   prefix <- paste(c(Sys.info(), unlist(R.version),
                     unlist(.Platform), getwd(), Sys.getpid(),
                     format(Sys.time(), "%Y%m%d%H%M%S", usetz=TRUE),
-                    more.state),
+                    more_state),
                   collapse="")
   options(op)
   ## Lookup table from hex to hex. Corresponds to setting
@@ -131,7 +137,7 @@ uuid.gen <- function(more.state="") {
   ## Linear search with string keys seems to be faster than
   ## alternatives using a) a hashed environment or
   ## b) the hex converted to integer +1 as an index to the table.
-  uuid.17.lookup <-
+  uuid_17_lookup <-
     c("0" = "8", "1" = "9", "2" = "a", "3" = "b",
       "4" = "8", "5" = "9", "6" = "a", "7" = "b", "8" = "8", "9" = "9",
       "a" = "a", "b" = "b", "c" = "8", "d" = "9", "e" = "a", "f" = "b",
@@ -150,11 +156,10 @@ uuid.gen <- function(more.state="") {
     paste0(substr(dgst, 1, 8), "-",
            substr(dgst, 9, 12), "-",
            "4", substr(dgst, 14, 16), "-",
-           uuid.17.lookup[substr(dgst, 17, 17)], substr(dgst, 18, 20), "-",
+           uuid_17_lookup[substr(dgst, 17, 17)], substr(dgst, 18, 20), "-",
            substr(dgst, 21, 32))
   }
 }
-
 
 #' @title Generate a vector of Version 4 UUIDs (RFC 4122)
 #'
@@ -167,6 +172,7 @@ uuid.gen <- function(more.state="") {
 #'   by 'R.oo'" when the package was loading.
 #' @param n Number of UUIDs to generate
 #' @examples
+#' \dontrun{
 #' # Create example data frame
 #' dat = tibble::tibble(survey_date = c("2019-05-10",
 #'                                     "2019-05-12",
@@ -200,12 +206,13 @@ uuid.gen <- function(more.state="") {
 #'   mutate(survey_id = get_uuid()) %>%
 #'   ungroup() %>%
 #'   select(survey_id, survey_date, species, fish_count)
+#' }
 #'
 #' @export
 get_uuid = function(n = 1L) {
   if (!typeof(n) %in% c("double", "integer") ) {
     stop("n must be an integer or double")
   }
-  ug = uuid.gen()
+  ug = uuid_gen()
   replicate(n = n, ug())
 }

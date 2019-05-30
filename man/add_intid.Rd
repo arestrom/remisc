@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_manipulation.R
 \name{add_intid}
 \alias{add_intid}
-\title{Add an grouped integer ID to a dataframe}
+\title{Add a grouped integer ID to a dataframe}
 \usage{
 add_intid(dat, key_cols, id_name, start_id)
 }
@@ -24,21 +24,23 @@ Adds a new unique ID to each member of a group in a dataframe. This
   to unique values.
 }
 \examples{
+\dontrun{
 # Create an example dataframe
-dat = dplyr::data_frame(lat = c(rep(47.6590, 7),
-                         rep(47.6348, 3),
-                         47.9033),
-                 lon = c(rep(-122.4657, 4),
-                         rep(-122.8743, 3),
-                         rep(-122.8876, 2),
-                         -122.8345, -122.4443),
-                 species = c("chum", "chin", "chin",
-                             "sthd", "chin", "sthd",
-                             "sthd", "chum", "chum",
-                             "pink", "pink"))
+dat = tibble::tibble(lat = c(rep(47.6590, 7),
+                             rep(47.6348, 3),
+                             47.9033),
+                     lon = c(rep(-122.4657, 4),
+                             rep(-122.8743, 3),
+                             rep(-122.8876, 2),
+                             -122.8345, -122.4443),
+                     species = c("chum", "chin", "chin",
+                                 "sthd", "chin", "sthd",
+                                 "sthd", "chum", "chum",
+                                 "pink", "pink"))
 
 # Add an integer ID, grouped by the key columns
 dat = add_intid(dat, key_cols = c("lat", "lon", "species"),
                 id_name = "survey_id", start_id = 100)
+}
 
 }

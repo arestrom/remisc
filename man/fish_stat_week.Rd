@@ -27,8 +27,8 @@ dtv = seq(as.Date("2017-01-01"),
 stat_week = fish_stat_week(dtv)
 
 # Create dataframe with date values
-fish_catch = dplyr::data_frame(survey_date = dtv,
-                               catch = as.integer(abs(rnorm(length(dtv)) * 10)))
+fish_catch = tibble::tibble(survey_date = dtv,
+                            catch = as.integer(abs(rnorm(length(dtv)) * 10)))
 
 # Add a stat_week column to fish_catch
 fish_catch$stat_week = fish_stat_week(fish_catch$survey_date)

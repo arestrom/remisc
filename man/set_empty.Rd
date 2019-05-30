@@ -23,7 +23,7 @@ fish_na = c("STHD", NA, "CHUM", "CHIN")
 fish_missing = set_empty(fish_na)
 
 # Set NA values in an entire dataframe to empty strings
-fish_na = dplyr::data_frame(fish_day = c("Mon", NA_character_, "Wed", "Thur"),
-                            fish_sp = c("STHD", NA_character_, "CHUM", "CHIN"))
+fish_na = tibble::tibble(fish_day = c("Mon", NA_character_, "Wed", "Thur"),
+                         fish_sp = c("STHD", NA_character_, "CHUM", "CHIN"))
 fish_na[] = lapply(fish_na, set_empty)
 }

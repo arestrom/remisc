@@ -19,8 +19,8 @@ Useful for converting NA values to zero when computing summary
 }
 \examples{
 # Create example dataframe
-fish_zero = dplyr::data_frame(fish_count = c(4L, NA, 5L),
-                              water_temp = c(5.4, 6.2, NA))
+fish_zero = tibble::tibble(fish_count = c(4L, NA, 5L),
+                           water_temp = c(5.4, 6.2, NA))
 
 # Set missing values to zero
 fish_zero[] = lapply(fish_zero, set_na_zero)
