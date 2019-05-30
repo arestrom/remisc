@@ -78,7 +78,6 @@ fish_stat_week = function(dts, start_day = "Mon") {
 #' @param start_id The ID value used to start the ID sequence. If \code{0} the IDs
 #'   start at \code{1}.
 #' @examples
-#' \dontrun{
 #' # Create an example dataframe
 #' dat = tibble::tibble(lat = c(rep(47.6590, 7),
 #'                              rep(47.6348, 3),
@@ -95,7 +94,6 @@ fish_stat_week = function(dts, start_day = "Mon") {
 #' # Add an integer ID, grouped by the key columns
 #' dat = add_intid(dat, key_cols = c("lat", "lon", "species"),
 #'                 id_name = "survey_id", start_id = 100)
-#' }
 #'
 #' @export
 add_intid = function(dat, key_cols, id_name, start_id) {
@@ -166,14 +164,14 @@ uuid_gen <- function(more_state = "") {
 #' @description Generates a vector of Version 4 (RFC 4122) UUIDs. This
 #'   function can be used to generate a vector of random UUID keys prior to
 #'   uploading a set of data to a database table that uses UUIDs as primary
-#'   or foreign keys. The uuid.gen function was written by Mikko Korpela
+#'   or foreign keys. The uuid_gen function was written by Mikko Korpela
 #'   and borrowed from the dplR package. It is included here only because
 #'   the dplR package generated a warning "Registered S3 method overwritten
 #'   by 'R.oo'" when the package was loading.
 #' @param n Number of UUIDs to generate
 #' @examples
-#' \dontrun{
 #' # Create example data frame
+#' library(dplyr)
 #' dat = tibble::tibble(survey_date = c("2019-05-10",
 #'                                     "2019-05-12",
 #'                                     "2019-05-14"),
@@ -184,10 +182,11 @@ uuid_gen <- function(more_state = "") {
 #'
 #' # One UUID per row
 #' dat = dat %>%
-#'   mutate(survey_id = get_uuid(n = nrow(dat))) %>%
+#'   mutate(survey_id = remisc::get_uuid(n = nrow(dat))) %>%
 #'   select(survey_id, survey_date, species, fish_count)
 #'
 #' # Create example data frame
+#' library(dplyr)
 #' dat = tibble::tibble(survey_date = c("2019-05-10",
 #'                                     "2019-05-10",
 #'                                     "2019-05-14",
@@ -203,10 +202,9 @@ uuid_gen <- function(more_state = "") {
 #' # One UUID per group
 #' dat = dat %>%
 #'   group_by(survey_date) %>%
-#'   mutate(survey_id = get_uuid()) %>%
+#'   mutate(survey_id = remisc::get_uuid()) %>%
 #'   ungroup() %>%
 #'   select(survey_id, survey_date, species, fish_count)
-#' }
 #'
 #' @export
 get_uuid = function(n = 1L) {

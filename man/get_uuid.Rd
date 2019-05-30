@@ -13,14 +13,14 @@ get_uuid(n = 1L)
 Generates a vector of Version 4 (RFC 4122) UUIDs. This
   function can be used to generate a vector of random UUID keys prior to
   uploading a set of data to a database table that uses UUIDs as primary
-  or foreign keys. The uuid.gen function was written by Mikko Korpela
+  or foreign keys. The uuid_gen function was written by Mikko Korpela
   and borrowed from the dplR package. It is included here only because
   the dplR package generated a warning "Registered S3 method overwritten
   by 'R.oo'" when the package was loading.
 }
 \examples{
-\dontrun{
 # Create example data frame
+library(dplyr)
 dat = tibble::tibble(survey_date = c("2019-05-10",
                                     "2019-05-12",
                                     "2019-05-14"),
@@ -31,10 +31,11 @@ dat = tibble::tibble(survey_date = c("2019-05-10",
 
 # One UUID per row
 dat = dat \%>\%
-  mutate(survey_id = get_uuid(n = nrow(dat))) \%>\%
+  mutate(survey_id = remisc::get_uuid(n = nrow(dat))) \%>\%
   select(survey_id, survey_date, species, fish_count)
 
 # Create example data frame
+library(dplyr)
 dat = tibble::tibble(survey_date = c("2019-05-10",
                                     "2019-05-10",
                                     "2019-05-14",
@@ -50,9 +51,8 @@ dat = tibble::tibble(survey_date = c("2019-05-10",
 # One UUID per group
 dat = dat \%>\%
   group_by(survey_date) \%>\%
-  mutate(survey_id = get_uuid()) \%>\%
+  mutate(survey_id = remisc::get_uuid()) \%>\%
   ungroup() \%>\%
   select(survey_id, survey_date, species, fish_count)
-}
 
 }

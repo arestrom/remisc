@@ -24,7 +24,6 @@ Adds a new unique ID to each member of a group in a dataframe. This
   to unique values.
 }
 \examples{
-\dontrun{
 # Create an example dataframe
 dat = tibble::tibble(lat = c(rep(47.6590, 7),
                              rep(47.6348, 3),
@@ -41,6 +40,5 @@ dat = tibble::tibble(lat = c(rep(47.6590, 7),
 # Add an integer ID, grouped by the key columns
 dat = add_intid(dat, key_cols = c("lat", "lon", "species"),
                 id_name = "survey_id", start_id = 100)
-}
 
 }
