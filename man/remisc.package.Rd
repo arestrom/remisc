@@ -3,7 +3,6 @@
 \docType{package}
 \name{remisc.package}
 \alias{remisc.package}
-\alias{remisc.package-package}
 \title{remisc}
 \description{
 Package providing a variety of simple functions, primarily for personal use.

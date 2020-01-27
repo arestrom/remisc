@@ -198,14 +198,14 @@ mult_by = function(dat, mult_value) {
 #' @param dat a dataframe that can include a mix of datatypes
 #' @param return_names A vector of two names for the return
 #'   dataframe.
-#' @return A dataframe reporting the \code{max(nchar(0) of
+#' @return A dataframe reporting the \code{max(nchar(0)} of
 #'   all columns in \code{data}. Non-character datatypes
 #'   will return NA.
 #'
 #' @examples
 #' # Create example dataframe
 #' fish_report = tibble::tibble(species = c("coho", "coho", "chin", "steelhead"),
-#'                              fish_method = c("Gillnet, Seine, Fish trap, Recreational angler),
+#'                              fish_method = c("Gillnet", "Seine", "Fish trap", "Recreational angler"),
 #'                              total_length = c(660, 589, 815, 450))
 #'
 #' # Report max length of strings in each column

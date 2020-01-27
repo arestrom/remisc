@@ -3,6 +3,7 @@
 export(add_intid)
 export(c2f)
 export(capwords)
+export(check_max_char)
 export(f2c)
 export(find_nth_match)
 export(fish_stat_week)
