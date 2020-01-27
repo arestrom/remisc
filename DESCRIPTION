@@ -1,7 +1,7 @@
 Package: remisc
 Type: Package
 Title: Some simple utility functions for personal use
-Version: 0.1.8
+Version: 0.1.9
 Authors@R: as.person(c(
     "Are Strom <Are.Strom@dfw.wa.gov> [aut, cre]",
     "Mikko Korpela [ctb]"
