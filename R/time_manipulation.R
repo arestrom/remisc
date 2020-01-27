@@ -1,6 +1,6 @@
 mil_to_hm = function(x) {
   require(dplyr)
-  mil = case_when(
+  mil = dplyr::case_when(
     x < 1 ~ '0000',
     x > 0 & x < 10 ~ paste0('000', x),
     x > 9 & x < 100 ~ paste0('00', x),
