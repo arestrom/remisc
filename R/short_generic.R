@@ -189,3 +189,34 @@ mult_by = function(dat, mult_value) {
   dat[] = lapply(dat, mult_item)
   dat
 }
+
+#' @title Check max length of strings in columns of a dataframe
+#' @description Determine the maximum length of each set of strings
+#'   in the columns of a dataframe. Non-character values will be
+#'   reported as NA.
+#' @rdname check_max_char
+#' @param dat a dataframe that can include a mix of datatypes
+#' @param return_names A vector of two names for the return
+#'   dataframe.
+#' @return A dataframe reporting the \code{max(nchar(0) of
+#'   all columns in \code{data}. Non-character datatypes
+#'   will return NA.
+#'
+#' @examples
+#' # Create example dataframe
+#' fish_report = tibble::tibble(species = c("coho", "coho", "chin", "steelhead"),
+#'                              fish_method = c("Gillnet, Seine, Fish trap, Recreational angler),
+#'                              total_length = c(660, 589, 815, 450))
+#'
+#' # Report max length of strings in each column
+#' fish_nchar = check_max_char(fish_report)
+#'
+#' @export
+check_max_char = function(dat, return_names = c("col_name", "max_chars")) {
+  max_char = function(x) max(nchar(x))
+  m_chars = apply(dat, 2, max_char)
+  m_chars = tibble::enframe(m_chars, name = TRUE)
+  names(m_chars) = c(return_names[[1]], return_names[[2]])
+  return(m_chars)
+}
+
