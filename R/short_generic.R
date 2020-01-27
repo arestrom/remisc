@@ -204,9 +204,11 @@ mult_by = function(dat, mult_value) {
 #'
 #' @examples
 #' # Create example dataframe
-#' fish_report = tibble::tibble(species = c("coho", "coho", "chin", "steelhead"),
-#'                              fish_method = c("Gillnet", "Seine", "Fish trap", "Recreational angler"),
-#'                              total_length = c(660, 589, 815, 450))
+#' fish_report = tibble::tibble(
+#'   species = c("coho", "coho", "chin", "steelhead"),
+#'   fish_method = c("Gillnet", "Seine", "Fish trap",
+#'                   "Recreational angler"),
+#'   total_length = c(660, 589, 815, 450))
 #'
 #' # Report max length of strings in each column
 #' fish_nchar = check_max_char(fish_report)
