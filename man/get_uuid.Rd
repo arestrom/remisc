@@ -18,7 +18,7 @@ This function is being deprecated in favor of directly using
   \code{uuid::UUIDgenerate()}. The current version of \code{get_uuid()} can
   be used as a drop-in replacement for the previous verison, but it is
   orders of magnitude faster. It is retained here strictly to avoid introducing
-  any breaking changes in existing code. For any new code, please use \code{UUIDGenerate()}.
+  any breaking changes in existing code. For any new code, please use \code{UUIDgenerate()}.
 }
 \examples{
 # Create example data frame
