@@ -10,13 +10,15 @@ get_uuid(n = 1L)
 \item{n}{Number of UUIDs to generate}
 }
 \description{
-Generates a vector of Version 4 (RFC 4122) UUIDs. This
-  function can be used to generate a vector of random UUID keys prior to
-  uploading a set of data to a database table that uses UUIDs as primary
-  or foreign keys. The uuid_gen function was written by Mikko Korpela
-  and borrowed from the dplR package. It is included here only because
-  the dplR package generated a warning "Registered S3 method overwritten
-  by 'R.oo'" when the package was loading.
+This function is being deprecated in favor of directly using
+  the \code{UUIDgenerate()} function from Simon Urbanek's \code{uuid} package. The updated
+  \code{UUIDgenerate()} function now generates vectors of proper version 4 random
+  UUIDs in a Windows environment. The previous version of the \code{get_uuid()}
+  relied on the \code{dplR::uuid_gen()} function, This has now been replaced by
+  \code{uuid::UUIDgenerate()}. The current version of \code{get_uuid()} can
+  be used as a drop-in replacement for the previous verison, but it is
+  orders of magnitude faster. It is retained here strictly to avoid introducing
+  any breaking changes in existing code. For any new code, please use \code{UUIDGenerate()}.
 }
 \examples{
 # Create example data frame

@@ -111,7 +111,7 @@ add_intid = function(dat, key_cols, id_name, start_id) {
 #'   \code{UUIDgenerate()} function now generates vectors of proper version 4 random
 #'   UUIDs in a Windows environment. The previous version of the \code{get_uuid()}
 #'   relied on the \code{dplR::uuid_gen()} function, This has now been replaced by
-#'   \code{uuid::UUIDgenerate(). The current version of \code{get_uuid()} can
+#'   \code{uuid::UUIDgenerate()}. The current version of \code{get_uuid()} can
 #'   be used as a drop-in replacement for the previous verison, but it is
 #'   orders of magnitude faster. It is retained here strictly to avoid introducing
 #'   any breaking changes in existing code. For any new code, please use \code{UUIDGenerate()}.
