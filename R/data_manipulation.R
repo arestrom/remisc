@@ -114,7 +114,7 @@ add_intid = function(dat, key_cols, id_name, start_id) {
 #'   \code{uuid::UUIDgenerate()}. The current version of \code{get_uuid()} can
 #'   be used as a drop-in replacement for the previous verison, but it is
 #'   orders of magnitude faster. It is retained here strictly to avoid introducing
-#'   any breaking changes in existing code. For any new code, please use \code{UUIDGenerate()}.
+#'   any breaking changes in existing code. For any new code, please use \code{UUIDgenerate()}.
 #' @param n Number of UUIDs to generate
 #' @examples
 #' # Create example data frame
