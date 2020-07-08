@@ -32,8 +32,8 @@ Requires R-3.5.0 or higher
 
 ```{r, eval = FALSE}
 # Install the development version from GitHub:
-# install.packages("devtools")
-devtools::install_github("arestrom/remisc")
+# install.packages("remotes")
+remotes::install_github("arestrom/remisc")
 ```
 
 
